@@ -31,7 +31,7 @@ public class StockDAOImp implements StockDAO {
         KoneksiDatabase koneksi = new KoneksiDatabase();
         connection = koneksi.koneksi();
     }
-    final String insert = "INSERT INTO tb_barang (idbarang, namabarang, jumlahbarang, pemasok) VALUES (?,?,?,?);";
+    final String insert = "INSERT INTO tb_barang (idbarang, jumlahbarang, namabarang, pemasok) VALUES (?,?,?,?);";
 
 //    public StockDAOImp(Connection koneksi) {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -41,7 +41,7 @@ public class StockDAOImp implements StockDAO {
     public void insert(Barang mhs) {
         PreparedStatement ps = null;
         try {
-            ps = connection.prepareStatement("INSERT INTO tb_barang (idbarang, namabarang, jumlahbarang, pemasok) VALUES (?, ?, ?, ?)");
+            ps = connection.prepareStatement("INSERT INTO tb_barang (idbarang, jumlahbarang, namabarang, pemasok) VALUES (?, ?, ?, ?)");
             ps.setString(1, mhs.getNim());
             ps.setString(2, mhs.getNama());
             ps.setString(3, mhs.getAlamat());
@@ -66,11 +66,11 @@ public class StockDAOImp implements StockDAO {
 public void update(Barang mhs) {
     PreparedStatement ps = null;
     try {
-        ps = connection.prepareStatement("UPDATE tb_barang SET pemasok=?, namabarang=?, jumlahbarang=? WHERE idbarang=?");
-        ps.setString(1, mhs.getNama());
-        ps.setString(2, mhs.getAlamat());
-        ps.setString(3, mhs.getNoHp());
-        ps.setString(4, mhs.getNim());
+        ps = connection.prepareStatement("UPDATE tb_barang SET pemasok=?, jumlahbarang=?, databarang=? WHERE idbarang=?");
+        ps.setString(1, mhs.getNim());
+            ps.setString(2, mhs.getNama());
+            ps.setString(3, mhs.getAlamat());
+            ps.setString(4, mhs.getNoHp());
         ps.executeUpdate();
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -119,9 +119,9 @@ public List<Barang> getAll() {
         while (rs.next()) {
             Barang mhs = new Barang();
             mhs.setNim(rs.getString("idbarang"));
-            mhs.setNama(rs.getString("namabarang"));
-            mhs.setAlamat(rs.getString("jumlahbarang"));
-            mhs.setNoHp(rs.getString("pemasok"));
+             mhs.setAlamat(rs.getString("namabarang"));
+            mhs.setNama(rs.getString("pemasok"));
+            mhs.setNoHp(rs.getString("jumlahbarang"));
             mahasiswaList.add(mhs);
         }
     } catch (SQLException ex) {
@@ -156,8 +156,8 @@ public List<Barang> getCariNama(String nama) {
         while (rs.next()) {
             Barang mhs = new Barang();
              mhs.setNim(rs.getString("idbarang"));
-            mhs.setNama(rs.getString("namabarang"));
-            mhs.setAlamat(rs.getString("jumlahbarang"));
+            mhs.setNama(rs.getString("jumlahbarang"));
+            mhs.setAlamat(rs.getString("namabarang"));
             mhs.setNoHp(rs.getString("pemasok"));
             mahasiswaList.add(mhs);
         }
