@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import stock.dao.imp.StockDAOImp;
 import stock.view.FrameStock;
-import stock.model.Barang;
+import stock.model.StockModel;
 
 /**
  *
@@ -30,22 +30,22 @@ public class StockController {
     
     //Insert Data User
     public void insert() {
-    Barang mhs = new Barang();
-    mhs.setNim(frame.getNimTextField().getText());
-    mhs.setNama(frame.getNamaTextField().getText());
-    mhs.setAlamat(frame.getAlamatTextField().getText());
-    mhs.setNoHp(frame.getNoHpTextField().getText());
+    StockModel mhs = new StockModel();
+    mhs.setIdb(frame.getNimTextField().getText());
+    mhs.setJumlah(frame.getNamaTextField().getText());
+    mhs.setPemasok(frame.getAlamatTextField().getText());
+    mhs.setNama(frame.getNoHpTextField().getText());
 
     daoMahasiswaImpl.insert(mhs);
     }   
     
     //MEMPERBARUHI
 public void update() {
-        Barang mhs = new Barang();
-        mhs.setNim(frame.getNimTextField().getText());
-        mhs.setNama(frame.getNamaTextField().getText());
-        mhs.setAlamat(frame.getAlamatTextField().getText());
-        mhs.setNoHp(frame.getNoHpTextField().getText());
+        StockModel mhs = new StockModel();
+        mhs.setIdb(frame.getNimTextField().getText());
+        mhs.setJumlah(frame.getNamaTextField().getText());
+        mhs.setPemasok(frame.getAlamatTextField().getText());
+        mhs.setNama(frame.getNoHpTextField().getText());
 
         daoMahasiswaImpl.update(mhs);
 
@@ -55,8 +55,8 @@ public void update() {
 
 //MENGHAPUS
 public void delete() {
-        Barang mhs = new Barang();
-        mhs.setNim(frame.getNimTextField().getText());
+        StockModel mhs = new StockModel();
+        mhs.setIdb(frame.getNimTextField().getText());
 
         daoMahasiswaImpl.delete(mhs);
 
@@ -74,7 +74,7 @@ public void reset() {
 
 public void tampilkanData() {
     // Mengambil data dari database
-    List<Barang> mahasiswaList = daoMahasiswaImpl.getAll();
+    List<StockModel> mahasiswaList = daoMahasiswaImpl.getAll();
 
     // Mendapatkan model tabel dari frame
     DefaultTableModel model = (DefaultTableModel) frame.getTabel_Data().getModel();
@@ -83,28 +83,28 @@ public void tampilkanData() {
     model.setRowCount(0);
 
     // Memasukkan data baru ke dalam tabel
-    for (Barang mhs : mahasiswaList) {
-        Object[] rowData = {mhs.getNim(), mhs.getNoHp(), mhs.getNama(), mhs.getAlamat()};
+    for (StockModel mhs : mahasiswaList) {
+        Object[] rowData = {mhs.getIdb(), mhs.getNama(), mhs.getJumlah(), mhs.getPemasok()};
         model.addRow(rowData);
     }
 }
 
 private void refreshTable() {
         // Ambil data terbaru dari database
-        List<Barang> mahasiswaList = daoMahasiswaImpl.getAll();
+        List<StockModel> mahasiswaList = daoMahasiswaImpl.getAll();
 
         // Update model tabel di frame
         DefaultTableModel model = (DefaultTableModel) frame.getTabel_Data().getModel();
         model.setRowCount(0); // Kosongkan tabel
 
         // Isi tabel dengan data terbaru
-        for (Barang mhs : mahasiswaList) {
-            Object[] rowData = {mhs.getNim(), mhs.getNoHp(), mhs.getNama(), mhs.getAlamat()};
+        for (StockModel mhs : mahasiswaList) {
+            Object[] rowData = {mhs.getIdb(), mhs.getNama(), mhs.getJumlah(), mhs.getPemasok()};
             model.addRow(rowData);
         }
     }
 
-public List<Barang> getMahasiswaList() {
+public List<StockModel> getMahasiswaList() {
         // Mengambil data dari database
         return daoMahasiswaImpl.getAll();
     }
@@ -112,7 +112,7 @@ public List<Barang> getMahasiswaList() {
 // Tambahkan metode cariNama
     public void cariNama(String nama) {
         // Panggil metode di DAO untuk mendapatkan hasil pencarian
-        List<Barang> hasilPencarian = daoMahasiswaImpl.getCariNama(nama);
+        List<StockModel> hasilPencarian = daoMahasiswaImpl.getCariNama(nama);
 
         // Update tabel dengan hasil pencarian
         frame.updateTabel(hasilPencarian);

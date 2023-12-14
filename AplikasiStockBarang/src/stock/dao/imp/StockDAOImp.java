@@ -13,12 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import stock.koneksi.KoneksiDatabase;
-import stock.model.Barang;
+import stock.model.StockModel;
 import stock.view.FrameStock;
 import stock.dao.StockDAO;
 //import mahasiswa.view.MahasiswaView;
-
-
 /**
  *
  * @author HP
@@ -31,21 +29,17 @@ public class StockDAOImp implements StockDAO {
         KoneksiDatabase koneksi = new KoneksiDatabase();
         connection = koneksi.koneksi();
     }
-    final String insert = "INSERT INTO tb_barang (idbarang, jumlahbarang, namabarang, pemasok) VALUES (?,?,?,?);";
-
-//    public StockDAOImp(Connection koneksi) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
+    final String insert = "INSERT INTO tb_barang (idbarang, namabarang, jumlahbarang, pemasok) VALUES (?,?,?,?);";
 
     @Override
-    public void insert(Barang mhs) {
+    public void insert(StockModel mhs) {
         PreparedStatement ps = null;
         try {
-            ps = connection.prepareStatement("INSERT INTO tb_barang (idbarang, jumlahbarang, namabarang, pemasok) VALUES (?, ?, ?, ?)");
-            ps.setString(1, mhs.getNim());
-            ps.setString(2, mhs.getNama());
-            ps.setString(3, mhs.getAlamat());
-            ps.setString(4, mhs.getNoHp());
+            ps = connection.prepareStatement("INSERT INTO tb_barang (idbarang, namabarang, jumlahbarang, pemasok) VALUES (?, ?, ?, ?)");
+            ps.setString(1, mhs.getIdb());
+             ps.setString(2, mhs.getNama());
+            ps.setString(3, mhs.getJumlah());
+            ps.setString(4, mhs.getPemasok());
             ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -63,14 +57,14 @@ public class StockDAOImp implements StockDAO {
 
    // Di dalam class StockDAOImp
 @Override
-public void update(Barang mhs) {
+public void update(StockModel mhs) {
     PreparedStatement ps = null;
     try {
-        ps = connection.prepareStatement("UPDATE tb_barang SET pemasok=?, jumlahbarang=?, databarang=? WHERE idbarang=?");
-        ps.setString(1, mhs.getNim());
-            ps.setString(2, mhs.getNama());
-            ps.setString(3, mhs.getAlamat());
-            ps.setString(4, mhs.getNoHp());
+        ps = connection.prepareStatement("UPDATE tb_barang SET namabarang=?, jumlahbarang=?, pemasok=? WHERE idbarang=?");
+         ps.setString(1, mhs.getIdb());
+          ps.setString(2, mhs.getNama());
+            ps.setString(3, mhs.getJumlah());
+            ps.setString(4, mhs.getPemasok());
         ps.executeUpdate();
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -86,11 +80,11 @@ public void update(Barang mhs) {
 }
 
 @Override
-public void delete(Barang mhs) {
+public void delete(StockModel mhs) {
     PreparedStatement ps = null;
     try {
         ps = connection.prepareStatement("DELETE FROM tb_barang WHERE idbarang=?");
-        ps.setString(1, mhs.getNim());
+        ps.setString(1, mhs.getIdb());
         ps.executeUpdate();
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -107,8 +101,8 @@ public void delete(Barang mhs) {
 
 // Implementasi metode getAll dan getCariNama sesuai kebutuhan
 @Override
-public List<Barang> getAll() {
-    List<Barang> mahasiswaList = new ArrayList<>();
+public List<StockModel> getAll() {
+    List<StockModel> mahasiswaList = new ArrayList<>();
     PreparedStatement ps = null;
     ResultSet rs = null;
 
@@ -117,11 +111,11 @@ public List<Barang> getAll() {
         rs = ps.executeQuery();
 
         while (rs.next()) {
-            Barang mhs = new Barang();
-            mhs.setNim(rs.getString("idbarang"));
-             mhs.setAlamat(rs.getString("namabarang"));
-            mhs.setNama(rs.getString("pemasok"));
-            mhs.setNoHp(rs.getString("jumlahbarang"));
+            StockModel mhs = new StockModel();
+            mhs.setIdb(rs.getString("idbarang"));
+            mhs.setJumlah(rs.getString("jumlahbarang"));
+            mhs.setPemasok(rs.getString("pemasok"));
+            mhs.setNama(rs.getString("namabarang"));
             mahasiswaList.add(mhs);
         }
     } catch (SQLException ex) {
@@ -143,8 +137,8 @@ public List<Barang> getAll() {
 }
 
 @Override
-public List<Barang> getCariNama(String nama) {
-    List<Barang> mahasiswaList = new ArrayList<>();
+public List<StockModel> getCariNama(String nama) {
+    List<StockModel> mahasiswaList = new ArrayList<>();
     PreparedStatement ps = null;
     ResultSet rs = null;
 
@@ -154,11 +148,11 @@ public List<Barang> getCariNama(String nama) {
         rs = ps.executeQuery();
 
         while (rs.next()) {
-            Barang mhs = new Barang();
-             mhs.setNim(rs.getString("idbarang"));
-            mhs.setNama(rs.getString("jumlahbarang"));
-            mhs.setAlamat(rs.getString("namabarang"));
-            mhs.setNoHp(rs.getString("pemasok"));
+            StockModel mhs = new StockModel();
+            mhs.setIdb(rs.getString("idbarang"));
+            mhs.setJumlah(rs.getString("jumlahbarang"));
+            mhs.setPemasok(rs.getString("pemasok"));
+            mhs.setNama(rs.getString("namabarang"));
             mahasiswaList.add(mhs);
         }
     } catch (SQLException ex) {

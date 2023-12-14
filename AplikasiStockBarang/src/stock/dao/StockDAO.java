@@ -5,7 +5,7 @@
 package stock.dao;
 
 import java.util.List;
-import stock.model.Barang;
+import stock.model.StockModel;
 //import mahasiswa.view.MahasiswaView;
 /**
  *
@@ -13,13 +13,13 @@ import stock.model.Barang;
  */
 public interface StockDAO {
     //Fungsi untuk melakukan proses CRUD pada database
-    public void insert(Barang mhs);
+    public void insert(StockModel mhs);
     
-    public void update(Barang mhs);
+    public void update(StockModel mhs);
     
-    public void delete(Barang mhs);
+    public void delete(StockModel mhs);
     
-    public List<Barang> getAll();
+    public List<StockModel> getAll();
     
-    public List<Barang> getCariNama(String nama);
+    public List<StockModel> getCariNama(String nama);
 }

@@ -1,10 +1,10 @@
 package stock.main;
 
 import stock.koneksi.KoneksiDatabase;
-import stock.view.FrameMahasiswa;
+import stock.view.FrameStock;
 import java.sql.Connection;
 import java.sql.SQLException;
-import stock.controller.MahasiswaController;
+import stock.controller.StockController;
 
 /**
  *
@@ -13,10 +13,10 @@ import stock.controller.MahasiswaController;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        FrameMahasiswa frameMahasiswa = new FrameMahasiswa();
+        FrameStock frameMahasiswa = new FrameStock();
         frameMahasiswa.setVisible(true);
 
-        MahasiswaController mhsController = new MahasiswaController(frameMahasiswa);
+        StockController mhsController = new StockController(frameMahasiswa);
         mhsController.tampilkanData();
     }
 }
