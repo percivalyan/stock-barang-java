@@ -18,7 +18,7 @@ public class KoneksiDatabase {
     
     public Connection koneksi() throws SQLException {
         try {
-            String db = "jdbc:mysql://localhost/databarang"; // Ganti URL sesuai dengan konfigurasi MySQL Anda
+            String db = "jdbc:mysql://localhost/db_databarang"; // Ganti URL sesuai dengan konfigurasi MySQL Anda
             String user = "root";
             String pass = "";
 
@@ -39,4 +39,3 @@ public class KoneksiDatabase {
         return conn; // Anda harus mengembalikan objek Connection setelah membuat koneksi
     }
 }
-
