@@ -83,7 +83,7 @@ public void tampilkanData() {
     model.setRowCount(0);
 
     // Memasukkan data baru ke dalam tabel
-    for (StockModel mhs : mahasiswaList) {
+     for (StockModel mhs : mahasiswaList) {
         Object[] rowData = {mhs.getIdb(), mhs.getNama(), mhs.getJumlah(), mhs.getPemasok()};
         model.addRow(rowData);
     }
@@ -98,7 +98,7 @@ private void refreshTable() {
         model.setRowCount(0); // Kosongkan tabel
 
         // Isi tabel dengan data terbaru
-        for (StockModel mhs : mahasiswaList) {
+       for (StockModel mhs : mahasiswaList) {
             Object[] rowData = {mhs.getIdb(), mhs.getNama(), mhs.getJumlah(), mhs.getPemasok()};
             model.addRow(rowData);
         }

@@ -17,6 +17,7 @@ import stock.model.StockModel;
 import stock.view.FrameStock;
 import stock.dao.StockDAO;
 //import mahasiswa.view.MahasiswaView;
+
 /**
  *
  * @author HP
@@ -29,15 +30,19 @@ public class StockDAOImp implements StockDAO {
         KoneksiDatabase koneksi = new KoneksiDatabase();
         connection = koneksi.koneksi();
     }
-    final String insert = "INSERT INTO tb_barang (idbarang, namabarang, jumlahbarang, pemasok) VALUES (?,?,?,?);";
+    final String insert = "INSERT INTO barangmasuk (idbarang, namabarang, jumlahbarang, pemasok) VALUES (?,?,?,?);";
+
+//    public StockDAOImp(Connection koneksi) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 
     @Override
     public void insert(StockModel mhs) {
         PreparedStatement ps = null;
         try {
-            ps = connection.prepareStatement("INSERT INTO tb_barang (idbarang, namabarang, jumlahbarang, pemasok) VALUES (?, ?, ?, ?)");
+            ps = connection.prepareStatement("INSERT INTO barangmasuk (idbarang, namabarang, jumlahbarang, pemasok) VALUES (?, ?, ?, ?)");
             ps.setString(1, mhs.getIdb());
-             ps.setString(2, mhs.getNama());
+            ps.setString(2, mhs.getNama());
             ps.setString(3, mhs.getJumlah());
             ps.setString(4, mhs.getPemasok());
             ps.executeUpdate();
@@ -60,11 +65,11 @@ public class StockDAOImp implements StockDAO {
 public void update(StockModel mhs) {
     PreparedStatement ps = null;
     try {
-        ps = connection.prepareStatement("UPDATE tb_barang SET namabarang=?, jumlahbarang=?, pemasok=? WHERE idbarang=?");
-         ps.setString(1, mhs.getIdb());
-          ps.setString(2, mhs.getNama());
-            ps.setString(3, mhs.getJumlah());
-            ps.setString(4, mhs.getPemasok());
+         ps = connection.prepareStatement("UPDATE barangmasuk SET namabarang=?, jumlahbarang=?, pemasok=? WHERE idbarang=?");
+        ps.setString(1, mhs.getIdb());
+        ps.setString(2, mhs.getNama());
+        ps.setString(3, mhs.getJumlah());
+        ps.setString(4, mhs.getPemasok());
         ps.executeUpdate();
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -83,7 +88,7 @@ public void update(StockModel mhs) {
 public void delete(StockModel mhs) {
     PreparedStatement ps = null;
     try {
-        ps = connection.prepareStatement("DELETE FROM tb_barang WHERE idbarang=?");
+        ps = connection.prepareStatement("DELETE FROM barangmasuk WHERE idbarang=?");
         ps.setString(1, mhs.getIdb());
         ps.executeUpdate();
     } catch (SQLException ex) {
@@ -107,7 +112,7 @@ public List<StockModel> getAll() {
     ResultSet rs = null;
 
     try {
-        ps = connection.prepareStatement("SELECT * FROM tb_barang");
+        ps = connection.prepareStatement("SELECT * FROM barangmasuk");
         rs = ps.executeQuery();
 
         while (rs.next()) {
@@ -143,7 +148,7 @@ public List<StockModel> getCariNama(String nama) {
     ResultSet rs = null;
 
     try {
-        ps = connection.prepareStatement("SELECT * FROM tb_barang WHERE namabarang LIKE ?");
+        ps = connection.prepareStatement("SELECT * FROM tb_mahasiswa WHERE nama LIKE ?");
         ps.setString(1, "%" + nama + "%");
         rs = ps.executeQuery();
 
