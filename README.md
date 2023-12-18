@@ -1,14 +1,12 @@
 # stock-barang-java
 
-Tugas Pmeograman 1
 Perlu Tambahan:
 1. ~~Menu Login~~
 2. ~~Menu Cetak (Memilih Data yang ingin dicetak)~~
 3. ~~Ganti GUI StockFrame.java~~
 4. ~~Merapikan Frame~~
 5. ~~Merapikan Syntax~~
-6. ~~Makalah Laporan Aplikasi~~
-
+6. ~~Makalah Laporan Aplikasi~~ (ApkikasiStockBarang.rar)
 7. Perbaikan UI
 8. Merapikan Source Code
 9. Update Fitur Barang Masuk
